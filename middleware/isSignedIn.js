@@ -15,9 +15,9 @@ const isSignedIn = async (req, res, next) => {
         }
         req.user = user
         console.log('the signed in user is', user)
-        
+
         next()
-    
+
     } catch (error) {
         console.error('the isSignedIn middleware is throwing an error')
         console.log(error.message)
