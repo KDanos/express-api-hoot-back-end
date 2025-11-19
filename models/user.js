@@ -5,7 +5,15 @@ const userSchema = new mongoose.Schema({
     username: { type: String, required: true, unique: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true }
-},
+},{
+    toJSON: {
+        //Remove the password from the Jason representation of the document whenever it is converted
+        transform:(doc,ret)=>{
+            delete ret.password // removes the password key from the obeject
+            return ret //specifies what value is sent to the client post-transfom
+        }
+    }
+}
 )
 
 //Capture the 'confirm password' entry as a variable

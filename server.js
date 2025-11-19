@@ -1,11 +1,16 @@
 import express from 'express'
 import mongoose from 'mongoose'
-import morgan from 'morgan'
-import cors from 'cors'
 import 'dotenv/config'
+
+//Middleware
+import cors from 'cors'
+import morgan from 'morgan'
+import isSignedIn from './middleware/isSignedIn.js'
+
 //Routers
 import authRouter from './controllers/auth.js'
- import isSignedIn from './middleware/isSignedIn.js'
+import hootRouter from './controllers/hoots.js'
+
 
 //Create the application
 const app = express()
@@ -17,6 +22,7 @@ app.use(morgan('dev'))
 
 //Routes
 app.use('/auth', authRouter)
+app.use ('/hoots', hootRouter)
 
 app.get('/', (req, res) => {
     res.send('Server is running')
